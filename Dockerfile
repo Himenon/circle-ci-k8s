@@ -6,3 +6,8 @@ RUN curl -L -o /tmp/docker-${DOCKER_VERSION}.tgz https://get.docker.com/builds/L
     tar -xz -C /tmp -f /tmp/docker-${DOCKER_VERSION}.tgz && \
     mv /tmp/docker/* /usr/bin
 RUN gcloud components install kubectl
+
+RUN apk --no-cache add libintl && \
+    apk --no-cache add --virtual .gettext gettext && \
+    cp /usr/bin/envsubst /usr/local/bin/envsubst && \
+    apk del .gettext
